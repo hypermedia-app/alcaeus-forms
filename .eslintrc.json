@@ -1,0 +1,11 @@
+{
+  "root": true,
+    "extends": ["@open-wc/eslint-config", "eslint-config-prettier", "standard"],
+    "plugins": ["lit"],
+    "rules": {
+  "space-before-function-paren": ["error", {
+    "named": "never"
+  }],
+      "comma-dangle": ["error", "always-multiline"]
+  }
+}
