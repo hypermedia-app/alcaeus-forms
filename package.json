@@ -2,10 +2,15 @@
   "name": "@hydrofoil/alcaeus-forms",
   "version": "0.0.1",
   "description": "Facilitates building forms to interact with Hydra APIs using Alcaeus",
+  "files": [
+    "lib/**"
+  ],
   "scripts": {
+    "prepare": "tsc",
+    "pretest": "tsc --build test/tsconfig.json",
     "test": "karma start --coverage",
-    "lint:eslint": "eslint --ext .js,.html .",
-    "format:eslint": "eslint --ext .js,.html . --fix",
+    "lint:eslint": "eslint --ext .js,.ts .",
+    "format:eslint": "eslint --ext .js,.html,.ts . --fix",
     "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "format:prettier": "prettier \"**/*.js\" --write",
     "lint": "npm run lint:eslint && npm run lint:prettier",
@@ -15,7 +20,8 @@
     "test:prune-snapshots": "karma start --prune-snapshots",
     "test:legacy": "karma start --legacy --coverage",
     "test:legacy:watch": "karma start --legacy --auto-watch=true --single-run=false",
-    "test:bs": "karma start karma.bs.config.js --legacy --coverage"
+    "test:bs": "karma start karma.bs.config.js --legacy --coverage",
+    "posttest": "cat ./coverage/coverage-final.json | remap-istanbul -o ./coverage/lcov.info -t lcovonly"
   },
   "repository": {
     "type": "git",
@@ -35,18 +41,29 @@
   },
   "homepage": "https://github.com/hypermedia-app/alcaeus-forms#readme",
   "devDependencies": {
-    "@open-wc/eslint-config": "^0.4.1",
-    "@open-wc/prettier-config": "^0.1.0",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.0",
+    "@lit-any/forms": "git+https://github.com/hypermedia-app/lit-any-forms.git",
+    "@open-wc/eslint-config": "^0.4.1",
+    "@open-wc/prettier-config": "^0.1.0",
+    "@open-wc/testing": "^0.11.1",
+    "@open-wc/testing-karma": "^2.0.0",
+    "@open-wc/testing-karma-bs": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "alcaeus": "^0.6.2",
+    "eslint-plugin-lit": "^1.0.0",
     "husky": "^1.0.0",
     "lint-staged": "^8.0.0",
-    "@open-wc/testing-karma": "^2.0.0",
-    "webpack-merge": "^4.1.5",
-    "@open-wc/testing-karma-bs": "^1.0.0",
-    "@open-wc/testing": "^0.11.1",
     "standard": "^12.0.1",
-    "eslint-plugin-lit": "^1.0.0"
+    "typescript": "^3.4.5",
+    "webpack-merge": "^4.1.5",
+    "lit-html": "^1.1.0",
+    "remap-istanbul": "^0.13.0"
+  },
+  "peerDependencies": {
+    "alcaeus": ">= 0.6",
+    "@lit-any/forms": ">= 0.9"
   },
   "lint-staged": {
     "*.js": [

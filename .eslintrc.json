@@ -1,11 +1,36 @@
 {
   "root": true,
-    "extends": ["@open-wc/eslint-config", "eslint-config-prettier", "standard"],
-    "plugins": ["lit"],
-    "rules": {
-  "space-before-function-paren": ["error", {
-    "named": "never"
-  }],
-      "comma-dangle": ["error", "always-multiline"]
+  "extends": [
+    "@open-wc/eslint-config",
+    "eslint-config-prettier",
+    "plugin:@typescript-eslint/recommended",
+    "standard"
+  ],
+  "env": {
+    "browser": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "lit",
+    "import"
+  ],
+  "rules": {
+    "indent": "off",
+    "import/no-unresolved": "warn",
+    "space-before-function-paren": [
+      "error",
+      {
+        "named": "never"
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ]
   }
 }
