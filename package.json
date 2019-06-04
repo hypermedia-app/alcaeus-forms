@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Facilitates building forms to interact with Hydra APIs using Alcaeus",
   "files": [
-    "lib/**"
+    "lib/**",
+    "alcaeus-form.*"
   ],
   "scripts": {
     "prepare": "tsc",
