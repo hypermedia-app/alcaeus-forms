@@ -12,11 +12,11 @@ interface FieldContractExtension {
 
 function propertyToField(sp: SupportedProperty & any): FieldContract & FieldContractExtension {
   return {
-    type: sp.property.range.id,
-    property: sp.property.id,
+    type: sp.property && sp.property.range && sp.property.range.id,
+    property: sp.property && sp.property.id,
     title: sp.title,
     description: sp.description,
-    required: sp.required,
+    required: sp.required === true,
     collection: sp['http://www.w3.org/ns/hydra/core#collection'],
   }
 }

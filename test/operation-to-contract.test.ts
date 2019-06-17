@@ -20,4 +20,114 @@ describe('operation-to-contract', () => {
     // then
     expect(contract.fields.length).to.equal(0)
   })
+
+  it('uses range.id for field.type', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [
+          {
+            property: {
+              range: {
+                id: 'foo:bar',
+              },
+            },
+          },
+        ],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields[0].type).to.equal('foo:bar')
+  })
+
+  it('uses property id for field.property', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [
+          {
+            property: {
+              id: 'foo:bar',
+            },
+          },
+        ],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields[0].property).to.equal('foo:bar')
+  })
+
+  it('uses property title for field.title', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [
+          {
+            title: 'hello world',
+          },
+        ],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields[0].title).to.equal('hello world')
+  })
+
+  it('uses operation title for contract.title', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      title: 'hello world',
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.title).to.equal('hello world')
+  })
+
+  it('uses operation description for contract.description', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      description: 'hello world',
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.description).to.equal('hello world')
+  })
+
+  it('field.required should be false if unspecified', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [{}],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields[0].required).to.be.false
+  })
 })
