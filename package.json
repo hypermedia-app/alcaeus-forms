@@ -12,8 +12,8 @@
     "test": "karma start --coverage",
     "lint:eslint": "eslint --ext .ts . --quiet",
     "format:eslint": "eslint --ext .ts . --fix",
-    "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
-    "format:prettier": "prettier \"**/*.js\" --write",
+    "lint:prettier": "prettier \"**/*.{ts,js}\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "format:prettier": "prettier \"**/*.{ts,js}\" --write",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "format": "npm run format:eslint && npm run format:prettier",
     "test:watch": "karma start --auto-watch=true --single-run=false",
@@ -68,7 +68,7 @@
     "@lit-any/forms": ">= 0.9"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{ts,js}": [
       "eslint --fix",
       "prettier --write",
       "git add"
