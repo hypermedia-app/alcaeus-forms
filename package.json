@@ -44,7 +44,7 @@
   "homepage": "https://github.com/hypermedia-app/alcaeus-forms#readme",
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
-    "@commitlint/config-conventional": "^7.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "@lit-any/forms": "^0.9.0",
     "@open-wc/eslint-config": "^0.4.1",
     "@open-wc/prettier-config": "^0.1.0",
