@@ -7,7 +7,7 @@
 ## Installation
 
 ```
-npm i --save @hydrofoil/alcaeus-form
+npm i --save @hydrofoil/alcaeus-forms
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ Here's an example showing how form is used with [`lit-html`][lhtml]
 ```js
 import { Hydra } from 'alcaeus'
 import { html } from 'lit-html'
-import '@hydrofoil/alcaeus-form'
+import '@hydrofoil/alcaeus-forms'
 
 const resource = (await Hydra.loadResource('http://hydra-movies.herokuapp.com/')).root
 const collection = resource.getCollections()[0]
