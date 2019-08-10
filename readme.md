@@ -17,7 +17,7 @@ Here's an example showing how form is used with [`lit-html`][lhtml]
 ```js
 import { Hydra } from 'alcaeus'
 import { html } from 'lit-html'
-import '@hydrofoil/alcaeus-forms'
+import '@hydrofoil/alcaeus-forms/alcaeus-form'
 
 const resource = (await Hydra.loadResource('http://hydra-movies.herokuapp.com/')).root
 const collection = resource.getCollections()[0]
