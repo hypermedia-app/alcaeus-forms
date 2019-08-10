@@ -53,7 +53,7 @@
     "@open-wc/testing-karma-bs": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
-    "alcaeus": "^0.6.2",
+    "alcaeus": "^0.7.1",
     "eslint-plugin-lit": "^1.0.0",
     "husky": "^1.0.0",
     "lint-staged": "^8.0.0",
