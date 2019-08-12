@@ -33,6 +33,21 @@ describe('<alcaeus-form>', () => {
       expect(() => el.operation).to.throw
     })
 
+    it('throws when set to null', async () => {
+      // then
+      const el = await fixture(
+        html`
+          <alcaeus-form></alcaeus-form>
+        `,
+      )
+      await el.updateComplete
+
+      // then
+      expect(() => {
+        el.operation = null
+      }).to.throw('Operation was undefined or null')
+    })
+
     it('returns the original value', async () => {
       // given
       const operation = {}
@@ -69,6 +84,27 @@ describe('<alcaeus-form>', () => {
 
     // then
     expect(el.value['@type']).to.equal('urn:example:type')
+  })
+
+  it('does not initialize the value with type Nothing', async () => {
+    // given
+    const operation = {
+      expects: {
+        id: 'http://www.w3.org/2002/07/owl#Nothing',
+        supportedProperties: [],
+      },
+    }
+
+    // then
+    const el = await fixture(
+      html`
+        <alcaeus-form .operation="${operation}"></alcaeus-form>
+      `,
+    )
+    await el.updateComplete
+
+    // then
+    expect(el.value['@type']).to.be.undefined
   })
 
   it('copies relevant literal properties from operation.target to value', async () => {

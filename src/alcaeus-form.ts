@@ -19,14 +19,18 @@ export default class AlcaeusForm extends LitForm {
 
   public set operation(operation: IOperation) {
     if (!operation) {
-      throw new Error('Operation was undefined of null')
+      throw new Error('Operation was undefined or null')
     }
 
     this.__operation = operation
     this.contract = convert(operation)
 
     const value: Record<string, unknown> = {}
-    if (operation.expects && operation.expects.id) {
+    if (
+      operation.expects &&
+      operation.expects.id &&
+      operation.expects.id !== 'http://www.w3.org/2002/07/owl#Nothing'
+    ) {
       value['@type'] = operation.expects.id
     }
 
