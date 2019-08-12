@@ -1,9 +1,9 @@
 import { LitForm } from '@lit-any/forms'
-import { SupportedOperation } from 'alcaeus/types/Resources'
+import { IOperation } from 'alcaeus/types/Resources'
 import convert from './lib/operation-to-contract'
 
 export default class AlcaeusForm extends LitForm {
-  private __operation: SupportedOperation | null = null
+  private __operation: IOperation | null = null
 
   public static get properties() {
     return { operation: { type: Object } }
@@ -17,9 +17,42 @@ export default class AlcaeusForm extends LitForm {
     return this.__operation
   }
 
-  public set operation(operation: SupportedOperation) {
+  public set operation(operation: IOperation) {
+    if (!operation) {
+      throw new Error('Operation was undefined or null')
+    }
+
     this.__operation = operation
     this.contract = convert(operation)
+
+    const value: Record<string, unknown> = {}
+    if (
+      operation.expects &&
+      operation.expects.id &&
+      operation.expects.id !== 'http://www.w3.org/2002/07/owl#Nothing'
+    ) {
+      value['@type'] = operation.expects.id
+    }
+
+    this.value = this.contract.fields.reduce((map, field) => {
+      if (operation.target) {
+        // @ts-ignore
+        const sourceValue = operation.target[field.property]
+        let formValue
+        if (typeof sourceValue === 'object') {
+          formValue = sourceValue
+        } else {
+          formValue = { '@value': sourceValue }
+        }
+
+        return {
+          ...map,
+          [field.property]: formValue,
+        }
+      }
+
+      return map
+    }, value)
   }
 }
 
