@@ -21,7 +21,7 @@
     "test:prune-snapshots": "karma start --prune-snapshots",
     "test:legacy": "karma start --legacy --coverage",
     "test:legacy:watch": "karma start --legacy --auto-watch=true --single-run=false",
-    "test:bs": "karma start karma.bs.config.js --legacy --coverage",
+    "test:bs": "karma start karma.bs.config.js --compatibility all --coverage",
     "release": "standard-version"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "@zazuko/rdf-vocabularies": "^2019.7.9-2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^8.0.0",
