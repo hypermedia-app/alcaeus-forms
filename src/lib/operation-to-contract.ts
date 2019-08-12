@@ -26,10 +26,20 @@ function propertyToField(sp: SupportedProperty & any): FieldContract & FieldCont
   return field
 }
 
-export default (operation: ISupportedOperation & IDocumentedResource): FormContract => ({
-  title: operation.title,
-  description: operation.description,
-  fields: operation.expects ? operation.expects.supportedProperties.map(propertyToField) : [],
-  method: operation.method,
-  target: '',
-})
+export default (operation: ISupportedOperation & IDocumentedResource): FormContract => {
+  const contract = {
+    title: operation.title,
+    description: operation.description,
+    fields: [] as FieldContract[],
+    method: operation.method,
+    target: '',
+  }
+
+  if (operation.expects) {
+    contract.fields = operation.expects.supportedProperties
+      .filter(property => property.writable !== false)
+      .map(propertyToField)
+  }
+
+  return contract
+}

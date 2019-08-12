@@ -150,4 +150,25 @@ describe('operation-to-contract', () => {
     // then
     expect(contract.fields[0].valueDecorator).to.be.ok
   })
+
+  it('skips properties which are not writable', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [
+          {
+            title: 'hello world',
+            writable: false,
+          },
+        ],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields).to.have.length(0)
+  })
 })
