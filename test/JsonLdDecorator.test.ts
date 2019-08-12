@@ -117,6 +117,17 @@ describe('JsonLdDecorator', () => {
       expect(unwrapped).to.be.equal('156')
     })
 
+    it('does not modify non-object', () => {
+      // given
+      const decorator = create('http://example.com')
+
+      // when
+      const unwrapped = decorator.unwrap('foo')
+
+      // then
+      expect(unwrapped).to.be.equal('foo')
+    })
+
     xit('converts @value with alcaeus', () => {
       // given
       const resource = {
