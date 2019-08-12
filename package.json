@@ -7,7 +7,7 @@
     "alcaeus-form.*"
   ],
   "scripts": {
-    "prepare": "tsc",
+    "prepack": "tsc",
     "test": "karma start --coverage",
     "test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false",
     "lint:eslint": "eslint --ext .ts . --quiet",
