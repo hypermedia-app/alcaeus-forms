@@ -130,4 +130,24 @@ describe('operation-to-contract', () => {
     // then
     expect(contract.fields[0].required).to.be.false
   })
+
+  it('decorates fields to set @value for literals', () => {
+    // given
+    const operation = {
+      ...nullOperation,
+      expects: {
+        supportedProperties: [
+          {
+            title: 'hello world',
+          },
+        ],
+      },
+    }
+
+    // when
+    const contract = convert(operation as any)
+
+    // then
+    expect(contract.fields[0].valueDecorator).to.be.ok
+  })
 })

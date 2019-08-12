@@ -42,6 +42,9 @@
     "url": "https://github.com/hypermedia-app/alcaeus-forms/issues"
   },
   "homepage": "https://github.com/hypermedia-app/alcaeus-forms#readme",
+  "dependencies": {
+    "@zazuko/rdf-vocabularies": "^2019.7.9-2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^8.0.0",
@@ -53,7 +56,7 @@
     "@open-wc/testing-karma-bs": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
-    "alcaeus": "^0.7.1",
+    "alcaeus": "^0.8",
     "eslint-plugin-lit": "^1.0.0",
     "husky": "^1.0.0",
     "lint-staged": "^8.0.0",
@@ -67,7 +70,7 @@
     "standard-version": "^6.0.1"
   },
   "peerDependencies": {
-    "alcaeus": ">= 0.6",
+    "alcaeus": ">= 0.8",
     "@lit-any/forms": ">= 0.9"
   },
   "lint-staged": {
