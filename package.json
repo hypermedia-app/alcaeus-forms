@@ -41,9 +41,6 @@
     "url": "https://github.com/hypermedia-app/alcaeus-forms/issues"
   },
   "homepage": "https://github.com/hypermedia-app/alcaeus-forms#readme",
-  "dependencies": {
-    "@zazuko/rdf-vocabularies": "^2019.7.9-2"
-  },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
