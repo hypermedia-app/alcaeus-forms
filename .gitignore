@@ -6,3 +6,4 @@ coverage/
 *.js.map
 !*.config.js
 !*.conf.js
+*.log
