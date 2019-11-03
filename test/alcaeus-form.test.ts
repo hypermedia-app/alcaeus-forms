@@ -140,6 +140,40 @@ describe('<alcaeus-form>', () => {
     expect(el.value.unsupported).to.be.undefined
   })
 
+  it('set string literal properties from operation.target to value along expected @type of properties', async () => {
+    // given
+    const operation = {
+      expects: {
+        id: 'urn:example:type',
+        supportedProperties: [
+          {
+            property: {
+              id: 'foo',
+              range: {
+                id: 'urn:example:prop-type',
+              },
+            },
+          },
+        ],
+      },
+      target: {
+        foo: 'bar',
+        unsupported: 'ignore',
+      },
+    }
+
+    // then
+    const el = await fixture(
+      html`
+        <alcaeus-form .operation="${operation}"></alcaeus-form>
+      `,
+    )
+    await el.updateComplete
+
+    // then
+    expect(el.value.foo['@type']).to.equal('urn:example:prop-type')
+  })
+
   it('copies relevant object properties from operation.target to value', async () => {
     // given
     const bar = { id: 'BAR' }

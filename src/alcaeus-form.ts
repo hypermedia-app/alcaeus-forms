@@ -42,7 +42,7 @@ export default class AlcaeusForm extends LitForm {
         if (typeof sourceValue === 'object') {
           formValue = sourceValue
         } else {
-          formValue = { '@value': sourceValue }
+          formValue = { '@value': sourceValue, '@type': field.type }
         }
 
         return {
