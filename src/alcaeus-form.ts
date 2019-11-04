@@ -25,7 +25,7 @@ export default class AlcaeusForm extends LitForm {
     this.__operation = operation
     this.contract = convert(operation)
 
-    const value: Record<string, unknown> = {}
+    const value: Record<string, unknown> = { ...this.value }
     if (
       operation.expects &&
       operation.expects.id &&
@@ -35,23 +35,27 @@ export default class AlcaeusForm extends LitForm {
     }
 
     this.value = this.contract.fields.reduce((map, field) => {
-      if (operation.target) {
-        // @ts-ignore
-        const sourceValue = operation.target[field.property]
-        let formValue
-        if (typeof sourceValue === 'object') {
-          formValue = sourceValue
-        } else {
-          formValue = { '@value': sourceValue, '@type': field.type }
-        }
-
-        return {
-          ...map,
-          [field.property]: formValue,
-        }
+      if (!operation.target) {
+        return map
       }
 
-      return map
+      if (field.property in map) {
+        return map
+      }
+
+      // @ts-ignore
+      const sourceValue = operation.target[field.property]
+      let formValue
+      if (typeof sourceValue === 'object') {
+        formValue = sourceValue
+      } else {
+        formValue = { '@value': sourceValue, '@type': field.type }
+      }
+
+      return {
+        ...map,
+        [field.property]: formValue,
+      }
     }, value)
   }
 }
