@@ -207,4 +207,46 @@ describe('<alcaeus-form>', () => {
     expect(el.value.foo.id).to.equal('BAR')
     expect(el.value.unsupported).to.be.undefined
   })
+
+  it('does not replace existing properties of value object', async () => {
+    // given
+    const operation = {
+      expects: {
+        id: 'urn:example:type',
+        supportedProperties: [
+          {
+            property: {
+              id: 'foo',
+            },
+          },
+          {
+            property: {
+              id: 'hello',
+            },
+          },
+        ],
+      },
+      target: {
+        foo: { id: 'BAR' },
+        hello: { '@value': 'ignored' },
+      },
+    }
+    const value = {
+      hello: {
+        '@value': 'world',
+      },
+    }
+
+    // then
+    const el = await fixture(
+      html`
+        <alcaeus-form .value="${value}" .operation="${operation}"></alcaeus-form>
+      `,
+    )
+    await el.updateComplete
+
+    // then
+    expect(el.value.foo.id).to.equal('BAR')
+    expect(el.value.hello['@value']).to.equal('world')
+  })
 })
