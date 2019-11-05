@@ -249,4 +249,34 @@ describe('<alcaeus-form>', () => {
     expect(el.value.foo.id).to.equal('BAR')
     expect(el.value.hello['@value']).to.equal('world')
   })
+
+  it('initializes a value when there is no operation.target', async () => {
+    // given
+    const operation = {
+      expects: {
+        id: 'urn:example:type',
+        supportedProperties: [
+          {
+            property: {
+              id: 'foo',
+              range: {
+                id: 'urn:example:prop-type',
+              },
+            },
+          },
+        ],
+      },
+    }
+
+    // then
+    const el = await fixture(
+      html`
+        <alcaeus-form .operation="${operation}"></alcaeus-form>
+      `,
+    )
+    await el.updateComplete
+
+    // then
+    expect(el.value['@type']).to.equal('urn:example:type')
+  })
 })

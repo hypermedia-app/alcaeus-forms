@@ -34,11 +34,12 @@ export default class AlcaeusForm extends LitForm {
       value['@type'] = operation.expects.id
     }
 
-    this.value = this.contract.fields.reduce((map, field) => {
-      if (!operation.target) {
-        return map
-      }
+    if (!operation.target) {
+      this.value = value
+      return
+    }
 
+    this.value = this.contract.fields.reduce((map, field) => {
       if (field.property in map) {
         return map
       }
